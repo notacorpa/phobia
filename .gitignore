@@ -1,4 +1,27 @@
-release/
-dist/
-assets/
-src/
+# Ignore everything in the project root by default
+*
+
+# Whitelist essential engine config & build files
+!/package.json
+!/tsconfig.json
+!/build.mjs
+!/index.html
+
+# Handle src/ -> Allow main.ts and the engine core folder, ignore user scripts
+!/src/
+/src/*
+!/src/engine/
+!/src/main.ts
+
+# Handle assets/ -> Allow only the engine assets folder, ignore user content
+!/assets/
+/assets/*
+!/assets/engine/
+
+# Explicitly ban build outputs, dependencies, and OS junk
+/dist/
+/release/
+/node_modules/
+.DS_Store
+Thumbs.db
+*.log

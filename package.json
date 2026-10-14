@@ -1,7 +1,7 @@
 {
-  "name": "critter-engine",
+  "name": "phobia",
   "version": "1.0.0",
-  "description": "Custom TypeScript Game Engine",
+  "description": "Phobia Web Game Engine",
   "main": "src/main.ts",
   "scripts": {
     "dev": "node build.mjs --serve",
@@ -13,7 +13,7 @@
     "typescript",
     "offline"
   ],
-  "author": "Emilia",
+  "author": "Aedan Maki",
   "license": "MIT",
   "devDependencies": {
     "adm-zip": "^0.6.1",
