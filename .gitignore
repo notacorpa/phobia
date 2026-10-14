@@ -7,11 +7,10 @@ Thumbs.db
 *.log
 
 # 2. Block user content inside the root assets folder, but keep /assets/engine/ tracked
-/assets/*
-!/assets/phobia/
+#/assets/*
+#!.phobia/assets/
 
 # 3. Block user script files inside src/ while keeping core engine folders and entry points tracked
 /src/*
-!/src/index.ts
+!/src/global.d.ts
 !/src/main.ts
-!/src/phobia/
