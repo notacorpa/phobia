@@ -12,7 +12,7 @@
   },
   "exports": {
     ".": "./src/main.ts",
-    "./engine/*": "./src/phobia/*"
+    "./engine/*": "./phobia/*"
   },
   "devDependencies": {
     "adm-zip": "^0.5.16",

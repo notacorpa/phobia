@@ -37,6 +37,7 @@ function copyRecursiveSync(src, dest) {
 }
 
 copyRecursiveSync(assetsDir, distAssetsDir);
+copyRecursiveSync('phobia/assets', 'dist/phobia/assets');
 console.log('📁 Assets copied successfully to dist/assets/');
 
 // 3. Copy index.html to dist
