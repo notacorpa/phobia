@@ -1,7 +1,8 @@
 {
   "name": "phobia",
-  "version": "1.0.0",
+  "version": "0.0.1-alpha.1",
   "description": "Offline 2D Web Game Engine for Chromebooks",
+  "author": "Aedan Maki",
   "type": "module",
   "main": "src/main.ts",
   "scripts": {
@@ -11,8 +12,7 @@
   },
   "exports": {
     ".": "./src/main.ts",
-    "./engine/*": "./src/engine/*",
-    "./core": "./src/engine/core/index.ts"
+    "./engine/*": "./src/phobia/*"
   },
   "devDependencies": {
     "adm-zip": "^0.5.16",

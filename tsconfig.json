@@ -7,7 +7,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "paths": {
-      "phobia": ["./src/engine/index.ts"]
+      "phobia": ["./src/phobia/index.ts"]
     }
   },
   "include": ["src/**/*"]

@@ -1,7 +1,7 @@
-// main.ts
 import * as $ from "phobia";
 
 const game = new $.Game();
-game.ready(() => {
-    document.title = "Baldi clicker!";
-});
+
+window.onload = () => {
+    alert(window.__PHOBIA_ENGINE_VERSION__);
+}
