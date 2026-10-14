@@ -1,4 +1,3 @@
-/*!
- * Copyright (c) 2026 Aedan Maki. All Rights Reserved.
- */
-//...
+// index.ts
+export * from './core/game-instance';
+export * from './core/scene';

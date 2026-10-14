@@ -1,6 +1,7 @@
 {
   "name": "phobia",
-  "version": "1.0.0",
+  "version": "1.0.1-alpha.1",
+  "buildtype": "debug",
   "description": "Offline Web Game Engine",
   "author": "Aedan Maki",
   "type": "module",
@@ -8,7 +9,8 @@
   "scripts": {
     "dev": "node build.mjs --serve",
     "build": "node build.mjs",
-    "package": "node build.mjs --package"
+    "package": "node build.mjs --package",
+    "cleanup": "node cleanup.mjs"
   },
   "exports": {
     ".": "./src/main.ts",

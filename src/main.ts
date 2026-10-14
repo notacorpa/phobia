@@ -1,1 +1,3 @@
-// src/main.ts
+import { GameInstance } from "phobia";
+
+const gi = new GameInstance();
