@@ -1,3 +1,1 @@
-import { GameInstance } from "phobia";
-
-const gi = new GameInstance();
+import * as $ from "phobia";

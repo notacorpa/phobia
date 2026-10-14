@@ -48,7 +48,6 @@ targets.forEach((target, index) => {
     if (fs.existsSync(resolvedPath)) {
         logDetail(`Found existing directory at "${resolvedPath}". Purging recursively...`);
         try {
-            // Fixed: rmSync with recursive & force safely deletes non-empty folders
             fs.rmSync(resolvedPath, { recursive: true, force: true });
             logSuccess('CLEANUP', `Successfully purged "${target}/" directory.`);
         } catch (err) {
