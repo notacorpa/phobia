@@ -1,0 +1,22 @@
+{
+  "name": "critter-engine",
+  "version": "1.0.0",
+  "description": "Custom TypeScript Game Engine",
+  "main": "src/main.ts",
+  "scripts": {
+    "dev": "node build.mjs --serve",
+    "build": "node build.mjs",
+    "package": "node build.mjs --package"
+  },
+  "keywords": [
+    "game-engine",
+    "typescript",
+    "offline"
+  ],
+  "author": "Emilia",
+  "license": "MIT",
+  "devDependencies": {
+    "adm-zip": "^0.6.1",
+    "esbuild": "^0.20.0"
+  }
+}
