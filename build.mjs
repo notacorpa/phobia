@@ -2,6 +2,7 @@ import * as esbuild from 'esbuild';
 import fs from 'fs';
 import path from 'path';
 import AdmZip from 'adm-zip';
+import JavaScriptObfuscator from 'javascript-obfuscator';
 
 const args = process.argv.slice(2);
 const isServe = args.includes('--serve');
@@ -37,26 +38,53 @@ function copyRecursiveSync(src, dest) {
 }
 
 copyRecursiveSync(assetsDir, distAssetsDir);
-copyRecursiveSync('phobia/assets', 'dist/phobia/assets');
-console.log('📁 Assets copied successfully to dist/assets/');
+if (fs.existsSync('./.phobia/assets')) {
+    copyRecursiveSync('./.phobia/assets', 'dist/phobia/assets');
+}
+console.log('📁 Assets copied successfully to dist/assets/ 🚀✨');
 
-// 3. Copy index.html to dist
-if (fs.existsSync('index.html')) {
-    fs.copyFileSync('index.html', path.join(distDir, 'index.html'));
-    console.log('📄 index.html copied to dist/');
-} else {
-    console.warn('⚠️ Warning: index.html not found in root directory!');
+// 3. Process and Minify index.html (Extreme Compression for Production)
+function processHtml() {
+    const indexPath = 'index.html';
+    const destIndexPath = path.join(distDir, 'index.html');
+
+    if (!fs.existsSync(indexPath)) {
+        console.warn('⚠️ Warning: index.html not found in root directory!');
+        return;
+    }
+
+    let htmlContent = fs.readFileSync(indexPath, 'utf8');
+
+    if (isPackage || !isServe) {
+        // Hardcore HTML minification: strip comments, collapse whitespace & newlines
+        htmlContent = htmlContent
+            .replace(/<!--[\s\S]*?-->/g, '') // Remove HTML comments
+            .replace(/\s{2,}/g, ' ')         // Collapse multiple spaces into one
+            .replace(/\n/g, '')              // Remove all newlines
+            .replace(/>\s+</g, '><')         // Remove whitespace between HTML tags
+            .trim();
+        console.log('🔒 index.html heavily obfuscated and minified!');
+    }
+
+    fs.writeFileSync(destIndexPath, htmlContent, 'utf8');
+    console.log('📄 index.html deployed to dist/');
 }
 
-// 4. Esbuild configuration for bundling everything into a SINGLE FILE
+processHtml();
+
+// 4. Esbuild configuration for initial bundling
 const buildOptions = {
     entryPoints: ['src/main.ts'],
     bundle: true,
     outfile: 'dist/bundle.js',
     target: ['es2022'],
     format: 'iife',
-    sourcemap: true,
-    minify: isPackage, // Minifies bundle code automatically during packaging!
+    // Disable sourcemaps in production packaging so people can't read your original source tree!
+    sourcemap: isServe ? 'inline' : false, 
+    // Keep esbuild minification light or disabled if javascript-obfuscator is handling the heavy lifting, 
+    // but enabling basic minification helps pre-compress before obfuscation.
+    minify: false, 
+    drop: isPackage ? ['console', 'debugger'] : [],
 };
 
 if (isServe) {
@@ -65,12 +93,49 @@ if (isServe) {
         servedir: 'dist',
         port: 3000,
     });
-    console.log(`🚀 Engine live development server running at http://${host}:${port}`);
+    console.log(`🚀 Engine live development server running at http://${host}:${port} 💻🔥`);
 } else {
+    // Build the bundle using esbuild first
     await esbuild.build(buildOptions);
-    console.log('🎉 Build complete! Single-file bundle and assets are ready in /dist.');
+    console.log('📦 Esbuild bundle generated successfully.');
 
-    // 5. Package into a ZIP file using AdmZip if --package flag is passed
+    // 5. Hardcore JavaScript Obfuscation Pass (Only for production/packaging)
+    if (isPackage || !isServe) {
+        const bundlePath = path.join(distDir, 'bundle.js');
+        if (fs.existsSync(bundlePath)) {
+            console.log('🛡️ Initiating hardcore cryptographic JavaScript obfuscation... 💀⚡');
+            
+            const rawCode = fs.readFileSync(bundlePath, 'utf8');
+            
+            const obfuscationResult = JavaScriptObfuscator.obfuscate(rawCode, {
+                compact: true,
+                controlFlowFlattening: true,
+                controlFlowFlatteningThreshold: 0.8,
+                numbersToExpressions: true,
+                simplify: true,
+                stringArray: true,
+                stringArrayEncoding: ['base64', 'rc4'],
+                stringArrayThreshold: 0.9,
+                deadCodeInjection: true,
+                deadCodeInjectionThreshold: 0.4,
+                identifierNamesGenerator: 'hexadecimal',
+                renameGlobals: false,
+                rotateStringArray: true,
+                selfDefending: false, // Keep false for local file builds to avoid breaking file:// protocol execution!
+                shuffleStringArray: true,
+                splitStrings: true,
+                splitStringsChunkLength: 5,
+                unicodeEscapeSequence: false
+            });
+
+            fs.writeFileSync(bundlePath, obfuscationResult.getObfuscatedCode(), 'utf8');
+            console.log('🔒 bundle.js successfully transformed into an impenetrable fortress of code! 🏰✨');
+        }
+    }
+
+    console.log('🎉 Build complete! Hardcore obfuscated bundle and assets are locked down in /dist. 🛡️💀');
+
+    // 6. Package into a ZIP file using AdmZip if --package flag is passed
     if (isPackage) {
         if (!fs.existsSync(releaseDir)) {
             fs.mkdirSync(releaseDir, { recursive: true });
@@ -83,6 +148,6 @@ if (isServe) {
         zip.addLocalFolder(distDir);
         zip.writeZip(zipPath);
 
-        console.log(`📦 Successfully packaged! Archive created at: release/game-build.zip 🚀🔥`);
+        console.log(`📦 Successfully packaged and secured! Archive created at: release/game-build.zip 🚀✨🖤`);
     }
 }
