@@ -1,22 +1,21 @@
 {
   "name": "phobia",
   "version": "1.0.0",
-  "description": "Phobia Web Game Engine",
+  "description": "Offline 2D Web Game Engine for Chromebooks",
+  "type": "module",
   "main": "src/main.ts",
   "scripts": {
     "dev": "node build.mjs --serve",
     "build": "node build.mjs",
     "package": "node build.mjs --package"
   },
-  "keywords": [
-    "game-engine",
-    "typescript",
-    "offline"
-  ],
-  "author": "Aedan Maki",
-  "license": "MIT",
+  "exports": {
+    ".": "./src/main.ts",
+    "./engine/*": "./src/engine/*",
+    "./core": "./src/engine/core/index.ts"
+  },
   "devDependencies": {
-    "adm-zip": "^0.6.1",
+    "adm-zip": "^0.5.16",
     "esbuild": "^0.20.0"
   }
 }
