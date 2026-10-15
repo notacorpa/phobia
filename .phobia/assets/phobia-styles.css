@@ -1,7 +1,13 @@
 @charset "UTF-8";
 
+/*
 body,
 html {
     background: #000;
     margin: 0;
+}
+    */
+
+.phobia-canvas {
+    border: 2px solid black;
 }
