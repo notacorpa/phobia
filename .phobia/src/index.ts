@@ -1,2 +1,2 @@
 // src/index.ts
-export * from "./graphics/graphics-device";
+export * from "./core/game";
