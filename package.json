@@ -2,6 +2,7 @@
   "name": "phobia",
   "version": "1.0.1-alpha.1",
   "buildtype": "debug",
+  "title": "Phobia",
   "description": "Offline Web Game Engine",
   "author": "Aedan Maki",
   "type": "module",

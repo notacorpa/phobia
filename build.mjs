@@ -116,7 +116,7 @@ logHeader('HTML Compilation');
 
 function processHtml() {
     const indexPath = 'index.html';
-    const destIndexPath = path.join(distDir, 'index.html');
+    const destIndexPath = path.join(distDir, `${npmstuff.title}.html`);
 
     logStep(5, 'HTML', `Locating template: ${indexPath}`);
     if (!fs.existsSync(indexPath)) {
