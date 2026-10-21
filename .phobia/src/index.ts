@@ -1,14 +1,10 @@
-// index.ts
-export * from "./interface/updatable";
-export * from "./event-listener";
-export * from "./base";
-export * from "./runtime";
-export * from "./sound";
+/**
+ * @file index.ts
+ * @copyright (c) 2026 Aedan Maki | Phobia
+ * @license MIT - https://opensource.org/licenses/MIT
+ */
 
-export const INIT = 'init';
-export const READY = 'ready';
-export const BEGIN = 'begin';
-export const TICK = 'tick';
-export const PLAY = 'play';
-export const PAUSE = 'pause';
-export const LOADED = 'loaded';
+export * from './core/Entity';
+export * from './core/Game';
+export * from './core/World';
+export * from './math/Vector3';
