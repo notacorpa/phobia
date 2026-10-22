@@ -1,7 +1,7 @@
-/**
- * @file Game.ts
- * @copyright (c) 2026 Aedan Maki | Phobia
- * @license MIT - https://opensource.org/licenses/MIT
- */
+import * as Phobia from 'phobia';
 
-export class Game {}
+export class Game extends Phobia.Base {
+    constructor() {
+        super();
+    }
+}
