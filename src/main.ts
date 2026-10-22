@@ -1,12 +1,12 @@
 import * as Phobia from 'phobia';
 
-document.addEventListener('DOMContentLoaded', () => {
-    const renderer = new Phobia.Renderer();
+const element = document.createElement('canvas');
+document.body.appendChild(element);
 
-    renderer._context2D.drawRect(
-        new Phobia.Vector2(50, 50),
-        new Phobia.Vector2(200, 50),
-        new Phobia.Vector2(200, 150),
-        new Phobia.Vector2(50, 150)
-    );
-});
+const gd = new Phobia.GraphicsDevice(element);
+gd.drawRect(
+    new Phobia.Vector2(50, 50),
+    new Phobia.Vector2(200, 50),
+    new Phobia.Vector2(200, 150),
+    new Phobia.Vector2(50, 50)
+)
